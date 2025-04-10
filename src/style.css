@@ -1,0 +1,52 @@
+
+.card {
+  background: #fff;
+  padding: 1.5em;
+  margin: 1em 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+h3 {
+  margin-bottom: 1em;
+}
+
+.btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.btn:hover {
+  background: #135ba1;
+}
+
+.btn-danger {
+  background: #e53935;
+}
+
+.btn-danger:hover {
+  background: #b71c1c;
+}
+
+.excel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.excel-table th, .excel-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+.excel-table input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+}

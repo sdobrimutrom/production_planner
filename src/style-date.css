@@ -1,0 +1,8 @@
+.input-date {
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: auto;
+  min-width: 200px;
+}

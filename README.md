@@ -1,70 +1,94 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Production Planner
 
-## Available Scripts
+Веб-приложение для расчета оптимального графика загрузки бригад по плану производства с учетом:
 
-In the project directory, you can run:
+- серийного и несерийного выпуска,
+- квалификации бригад,
+- ограничения по рабочему времени,
+- слесарного участка с двумя бригадами и равномерной загрузкой.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔧 Установка и запуск
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1. Клонировать проект
 
-### `npm test`
+```
+git clone https://github.com/your/repo.git
+cd production-planner
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Установить и запустить **бэкенд** (Python + Pyomo)
 
-### `npm run build`
+#### 2.1 Установить зависимости
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 2.2 Установить решатель CBC
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Через Conda (рекомендуется):**
 
-### `npm run eject`
+```bash
+conda install -c conda-forge coincbc
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Или вручную (Windows):**
+- Скачать из: https://github.com/coin-or/Cbc/releases
+- Распаковать и добавить путь к `cbc.exe` в `PATH`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 2.3 Запуск сервера
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+python server_full_model_fixed.py
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Сервер будет доступен на `http://localhost:5000`.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 3. Установить и запустить **фронтенд** (React)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 3.1 Установка
 
-### Code Splitting
+```bash
+cd frontend
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### 3.2 Запуск
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Фронтенд запустится на `http://localhost:3000`.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📦 Структура проекта
 
-### Advanced Configuration
+```
+backend/
+  └── server_full_model_fixed.py   # Flask + Pyomo + CBC модель
+  └── requirements.txt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+frontend/
+  └── src/
+      └── components/
+          └── BrigadesForm.js
+          └── ProductsForm.js
+          └── ResultView.js
+      └── style.css
+      └── App.js
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
