@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import BrigadesForm from './components/BrigadesForm';
 import ProductsForm from './components/ProductsForm';
 import StartDatePicker from './components/StartDatePicker';
 import ScheduleTable from './components/ScheduleTable';
 import ResultView from './components/ResultView';
+import AlphaInput from './components/AlphaInput';
 import axios from 'axios';
 import './style.css';
 
@@ -11,6 +13,7 @@ function App() {
   const [brigades, setBrigades] = useState([]);
   const [products, setProducts] = useState([]);
   const [startDate, setStartDate] = useState('');
+  const [alpha, setAlpha] = useState(1.0);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
@@ -24,7 +27,8 @@ function App() {
       const response = await axios.post('http://localhost:5000/optimize', {
         brigades,
         products,
-        startDate
+        startDate,
+        alpha
       });
       setResult(response.data);
       setError('');
@@ -39,6 +43,7 @@ function App() {
       <StartDatePicker value={startDate} onChange={setStartDate} />
       <BrigadesForm onChange={setBrigades} />
       <ProductsForm brigades={brigades} onChange={setProducts} />
+      <AlphaInput value={alpha} onChange={setAlpha} />
       <div style={{ margin: '1em 0' }}>
         <button onClick={handleCalculate} className="btn">📊 Рассчитать график</button>
       </div>
