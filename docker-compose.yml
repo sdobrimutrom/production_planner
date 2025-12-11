@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  optimizer:
+    build: .
+    container_name: optimization_service
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
